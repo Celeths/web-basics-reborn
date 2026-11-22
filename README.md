@@ -12,9 +12,11 @@ Each core function is packaged as an independent module. No build step, no depen
 | --- | --- |
 | [pure-css-nested-menu](modules/pure-css-nested-menu) | A branching menu at any depth. One open path at a time, three CSS rules, no ghost re-opens. |
 
-## Using one
+<iframe src="modules/pure-css-nested-menu/pure-css-nested-menu/examples/abc.html" width="100%" height="400"></iframe>
 
-1. Take the module's folder, or just its stylesheet.
-2. Link the stylesheet.
+
+## Using A Module
+
+1. Download the whole repo or any desired module.
+2. Link the stylesheet and any optional/ supplemental JavaScript.
 3. Write the markup its readme describes.
-4. Add the optional script only if you want the accessibility layer.
