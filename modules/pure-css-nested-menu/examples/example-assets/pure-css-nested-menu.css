@@ -1,0 +1,12 @@
+.node > input[type=radio] {
+	display: block;
+	position: absolute;
+	opacity: 0;
+	pointer-events: none;
+}
+
+.node > :is(.close, .panel),
+.node:has(input[type=radio]:checked) > .open { display: none; }
+
+.node > .open,
+.node:has(input[type=radio]:checked) > :is(.close, .panel) { display: block; }

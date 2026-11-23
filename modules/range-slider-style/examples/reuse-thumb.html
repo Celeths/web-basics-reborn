@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>range-slider-style — reuse thumb</title>
+  <link rel="stylesheet" href="example-assets/range-slider-style.css">
+  <style>
+    * { box-sizing: border-box; }
+
+    :root {
+      --accent: #6366f1;
+      --surface: #ffffff;
+      --track-base: #e2e8f0;
+    }
+  </style>
+</head>
+<body style="
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  background: #f8fafc;
+">
+  <div style="
+    width: clamp(250px, 90vw, 1500px);
+    min-height: 100vh;
+    padding-block: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: stretch;
+    gap: 2rem;
+  ">
+
+    <!-- Shared --slider-thumb anchor name (isolated per slider via anchor-scope) -->
+    <div style="
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    ">
+      <span class="slider" style="
+        flex: 1 1 0;
+        --slider-fill-color: var(--accent);
+        --slider-rest-color: color-mix(in srgb, var(--accent) 20%, var(--track-base));
+      ">
+        <input type="range" min="0" max="100" value="25" aria-label="Paired slider A">
+        <svg class="thumb" viewBox="0 0 24 24" display="none" aria-hidden="true">
+          <circle cx="12" cy="12" r="8" style="
+            fill: var(--surface);
+            stroke: var(--accent);
+            stroke-width: 3px;
+          "/>
+        </svg>
+      </span>
+      <span class="slider" style="
+        flex: 1 1 0;
+        --slider-fill-color: var(--accent);
+        --slider-rest-color: color-mix(in srgb, var(--accent) 20%, var(--track-base));
+      ">
+        <input type="range" min="0" max="100" value="75" aria-label="Paired slider B">
+        <svg class="thumb" viewBox="0 0 24 24" display="none" aria-hidden="true">
+          <circle cx="12" cy="12" r="8" style="
+            fill: var(--surface);
+            stroke: var(--accent);
+            stroke-width: 3px;
+          "/>
+        </svg>
+      </span>
+    </div>
+
+  </div>
+</body>
+</html>

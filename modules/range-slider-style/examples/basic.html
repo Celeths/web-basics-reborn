@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>range-slider-style — basic</title>
+  <link rel="stylesheet" href="example-assets/range-slider-style.css">
+  <style>
+    * { box-sizing: border-box; }
+
+    :root {
+      --surface: #ffffff;
+      --muted: #94a3b8;
+      --track-base: #e2e8f0;
+    }
+  </style>
+</head>
+<body style="
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  background: #f8fafc;
+">
+  <div style="
+    width: clamp(250px, 90vw, 1500px);
+    min-height: 100vh;
+    padding-block: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: stretch;
+    gap: 2rem;
+  ">
+
+    <!-- 1. Default (no .thumb) -->
+    <span class="slider">
+      <input type="range" min="0" max="100" value="50" aria-label="Default slider">
+    </span>
+
+    <!-- 2. Disabled -->
+    <span class="slider">
+      <input type="range" min="0" max="100" value="40" disabled aria-label="Disabled slider">
+      <svg class="thumb" viewBox="0 0 24 24" display="none" aria-hidden="true">
+        <circle cx="12" cy="12" r="8" style="
+          fill: var(--surface);
+          stroke: var(--muted);
+          stroke-width: 3px;
+        "/>
+      </svg>
+    </span>
+
+    <!-- 3. RTL arrow -->
+    <span class="slider" dir="rtl" style="
+      --slider-fill-color: #14b8a6;
+      --slider-rest-color: color-mix(in srgb, #14b8a6 20%, var(--track-base));
+    ">
+      <input type="range" min="0" max="100" value="35" aria-label="Right-to-left arrow slider">
+      <svg class="thumb" viewBox="0 0 24 24" display="none" aria-hidden="true">
+        <polygon points="16,4 6,12 16,20" style="
+          fill: #14b8a6;
+        "/>
+      </svg>
+    </span>
+
+  </div>
+</body>
+</html>

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Basic Pure CSS Branching Drop-Menu</title>
-  <link rel="stylesheet" href="../assets/pure-css-nested-menu.css">
+  <link rel="stylesheet" href="example-assets/pure-css-nested-menu.css">
   <style>
     * { box-sizing: border-box; }
     body { font-family: system-ui, sans-serif; margin: 1.5rem; }
@@ -18,6 +18,7 @@
     }
 
     /* Minimal button & nested panel styling */
+    .open { display: block; }
     .open,
     .close {
       width: 100%;
@@ -50,7 +51,7 @@
     }
 
   </style>
-  <script src="../assets/pure-css-nested-menu.js" defer></script>
+  <script src="example-assets/pure-css-nested-menu.js" defer></script>
 </head>
 <body>
   <!-- Single external form so root close buttons reset all radios -->
@@ -59,96 +60,96 @@
   <div class="menus">
     <!-- ==================== MENU A ==================== -->
     <div class="node">
-      <input type="radio" name="menu" id="a" form="menu-form">
+      <input type="radio" name="menu" id="a" form="menu-form" hidden>
       <label for="a" class="open">Open Menu A</label>
-      <button type="reset" form="menu-form" class="close">Close Menu A</button>
+      <button type="reset" form="menu-form" class="close" hidden>Close Menu A</button>
 
-      <div class="panel">
+      <div class="panel" hidden>
         <div class="node">
-          <input type="radio" name="menu" id="a-1" form="menu-form">
+          <input type="radio" name="menu" id="a-1" form="menu-form" hidden>
           <label for="a-1" class="open">Open Option A-1</label>
-          <label for="a" class="close">Close Option A-1</label>
+          <label for="a" class="close" hidden>Close Option A-1</label>
 
-          <div class="panel">
+          <div class="panel" hidden>
             <div class="node">
-              <input type="radio" name="menu" id="a-1-1" form="menu-form">
+              <input type="radio" name="menu" id="a-1-1" form="menu-form" hidden>
               <label for="a-1-1" class="open">Open Option A-1-1</label>
-              <label for="a-1" class="close">Close Option A-1-1</label>
+              <label for="a-1" class="close" hidden>Close Option A-1-1</label>
 
-              <div class="panel">
+              <div class="panel" hidden>
                 <div class="node">
-                  <input type="radio" name="menu" id="a-1-1-1" form="menu-form">
+                  <input type="radio" name="menu" id="a-1-1-1" form="menu-form" hidden>
                   <label for="a-1-1-1" class="open">Open Option A-1-1-1</label>
-                  <label for="a-1-1" class="close">Close Option A-1-1-1</label>
+                  <label for="a-1-1" class="close" hidden>Close Option A-1-1-1</label>
 
-                  <div class="panel">
+                  <div class="panel" hidden>
                     <div class="node">
-                      <input type="radio" name="menu" id="a-1-1-1-1" form="menu-form">
+                      <input type="radio" name="menu" id="a-1-1-1-1" form="menu-form" hidden>
                       <label for="a-1-1-1-1" class="open">Open Option A-1-1-1-1</label>
-                      <label for="a-1-1-1" class="close">Close Option A-1-1-1-1</label>
+                      <label for="a-1-1-1" class="close" hidden>Close Option A-1-1-1-1</label>
 
-                      <div class="panel">
+                      <div class="panel" hidden>
                         <div class="node">
-                          <input type="radio" name="menu" id="a-1-1-1-1-1" form="menu-form">
+                          <input type="radio" name="menu" id="a-1-1-1-1-1" form="menu-form" hidden>
                           <label for="a-1-1-1-1-1" class="open">Open Option A-1-1-1-1-1</label>
-                          <label for="a-1-1-1-1" class="close">Close Option A-1-1-1-1-1</label>
-                          <div class="panel"><div class="leaf">Option A-1-1-1-1-1</div></div>
+                          <label for="a-1-1-1-1" class="close" hidden>Close Option A-1-1-1-1-1</label>
+                          <div class="panel" hidden><div class="leaf">Option A-1-1-1-1-1</div></div>
                         </div>
 
                         <div class="node">
-                          <input type="radio" name="menu" id="a-1-1-1-1-2" form="menu-form">
+                          <input type="radio" name="menu" id="a-1-1-1-1-2" form="menu-form" hidden>
                           <label for="a-1-1-1-1-2" class="open">Open Option A-1-1-1-1-2</label>
-                          <label for="a-1-1-1-1" class="close">Close Option A-1-1-1-1-2</label>
-                          <div class="panel"><div class="leaf">Option A-1-1-1-1-2</div></div>
+                          <label for="a-1-1-1-1" class="close" hidden>Close Option A-1-1-1-1-2</label>
+                          <div class="panel" hidden><div class="leaf">Option A-1-1-1-1-2</div></div>
                         </div>
                       </div>
                     </div>
 
                     <div class="node">
-                      <input type="radio" name="menu" id="a-1-1-1-2" form="menu-form">
+                      <input type="radio" name="menu" id="a-1-1-1-2" form="menu-form" hidden>
                       <label for="a-1-1-1-2" class="open">Open Option A-1-1-1-2</label>
-                      <label for="a-1-1-1" class="close">Close Option A-1-1-1-2</label>
-                      <div class="panel"><div class="leaf">Option A-1-1-1-2</div></div>
+                      <label for="a-1-1-1" class="close" hidden>Close Option A-1-1-1-2</label>
+                      <div class="panel" hidden><div class="leaf">Option A-1-1-1-2</div></div>
                     </div>
                   </div>
                 </div>
 
                 <div class="node">
-                  <input type="radio" name="menu" id="a-1-1-2" form="menu-form">
+                  <input type="radio" name="menu" id="a-1-1-2" form="menu-form" hidden>
                   <label for="a-1-1-2" class="open">Open Option A-1-1-2</label>
-                  <label for="a-1-1" class="close">Close Option A-1-1-2</label>
-                  <div class="panel"><div class="leaf">Option A-1-1-2</div></div>
+                  <label for="a-1-1" class="close" hidden>Close Option A-1-1-2</label>
+                  <div class="panel" hidden><div class="leaf">Option A-1-1-2</div></div>
                 </div>
               </div>
             </div>
 
             <div class="node">
-              <input type="radio" name="menu" id="a-1-2" form="menu-form">
+              <input type="radio" name="menu" id="a-1-2" form="menu-form" hidden>
               <label for="a-1-2" class="open">Open Option A-1-2</label>
-              <label for="a-1" class="close">Close Option A-1-2</label>
-              <div class="panel"><div class="leaf">Option A-1-2</div></div>
+              <label for="a-1" class="close" hidden>Close Option A-1-2</label>
+              <div class="panel" hidden><div class="leaf">Option A-1-2</div></div>
             </div>
           </div>
         </div>
 
         <div class="node">
-          <input type="radio" name="menu" id="a-2" form="menu-form">
+          <input type="radio" name="menu" id="a-2" form="menu-form" hidden>
           <label for="a-2" class="open">Open Option A-2</label>
-          <label for="a" class="close">Close Option A-2</label>
+          <label for="a" class="close" hidden>Close Option A-2</label>
 
-          <div class="panel">
+          <div class="panel" hidden>
             <div class="node">
-              <input type="radio" name="menu" id="a-2-1" form="menu-form">
+              <input type="radio" name="menu" id="a-2-1" form="menu-form" hidden>
               <label for="a-2-1" class="open">Open Option A-2-1</label>
-              <label for="a-2" class="close">Close Option A-2-1</label>
-              <div class="panel"><div class="leaf">Option A-2-1</div></div>
+              <label for="a-2" class="close" hidden>Close Option A-2-1</label>
+              <div class="panel" hidden><div class="leaf">Option A-2-1</div></div>
             </div>
 
             <div class="node">
-              <input type="radio" name="menu" id="a-2-2" form="menu-form">
+              <input type="radio" name="menu" id="a-2-2" form="menu-form" hidden>
               <label for="a-2-2" class="open">Open Option A-2-2</label>
-              <label for="a-2" class="close">Close Option A-2-2</label>
-              <div class="panel"><div class="leaf">Option A-2-2</div></div>
+              <label for="a-2" class="close" hidden>Close Option A-2-2</label>
+              <div class="panel" hidden><div class="leaf">Option A-2-2</div></div>
             </div>
           </div>
         </div>
@@ -157,96 +158,96 @@
 
     <!-- ==================== MENU B ==================== -->
     <div class="node">
-      <input type="radio" name="menu" id="b" form="menu-form">
+      <input type="radio" name="menu" id="b" form="menu-form" hidden>
       <label for="b" class="open">Open Menu B</label>
-      <button type="reset" form="menu-form" class="close">Close Menu B</button>
+      <button type="reset" form="menu-form" class="close" hidden>Close Menu B</button>
 
-      <div class="panel">
+      <div class="panel" hidden>
         <div class="node">
-          <input type="radio" name="menu" id="b-1" form="menu-form">
+          <input type="radio" name="menu" id="b-1" form="menu-form" hidden>
           <label for="b-1" class="open">Open Option B-1</label>
-          <label for="b" class="close">Close Option B-1</label>
+          <label for="b" class="close" hidden>Close Option B-1</label>
 
-          <div class="panel">
+          <div class="panel" hidden>
             <div class="node">
-              <input type="radio" name="menu" id="b-1-1" form="menu-form">
+              <input type="radio" name="menu" id="b-1-1" form="menu-form" hidden>
               <label for="b-1-1" class="open">Open Option B-1-1</label>
-              <label for="b-1" class="close">Close Option B-1-1</label>
+              <label for="b-1" class="close" hidden>Close Option B-1-1</label>
 
-              <div class="panel">
+              <div class="panel" hidden>
                 <div class="node">
-                  <input type="radio" name="menu" id="b-1-1-1" form="menu-form">
+                  <input type="radio" name="menu" id="b-1-1-1" form="menu-form" hidden>
                   <label for="b-1-1-1" class="open">Open Option B-1-1-1</label>
-                  <label for="b-1-1" class="close">Close Option B-1-1-1</label>
+                  <label for="b-1-1" class="close" hidden>Close Option B-1-1-1</label>
 
-                  <div class="panel">
+                  <div class="panel" hidden>
                     <div class="node">
-                      <input type="radio" name="menu" id="b-1-1-1-1" form="menu-form">
+                      <input type="radio" name="menu" id="b-1-1-1-1" form="menu-form" hidden>
                       <label for="b-1-1-1-1" class="open">Open Option B-1-1-1-1</label>
-                      <label for="b-1-1-1" class="close">Close Option B-1-1-1-1</label>
+                      <label for="b-1-1-1" class="close" hidden>Close Option B-1-1-1-1</label>
 
-                      <div class="panel">
+                      <div class="panel" hidden>
                         <div class="node">
-                          <input type="radio" name="menu" id="b-1-1-1-1-1" form="menu-form">
+                          <input type="radio" name="menu" id="b-1-1-1-1-1" form="menu-form" hidden>
                           <label for="b-1-1-1-1-1" class="open">Open Option B-1-1-1-1-1</label>
-                          <label for="b-1-1-1-1" class="close">Close Option B-1-1-1-1-1</label>
-                          <div class="panel"><div class="leaf">Option B-1-1-1-1-1</div></div>
+                          <label for="b-1-1-1-1" class="close" hidden>Close Option B-1-1-1-1-1</label>
+                          <div class="panel" hidden><div class="leaf">Option B-1-1-1-1-1</div></div>
                         </div>
 
                         <div class="node">
-                          <input type="radio" name="menu" id="b-1-1-1-1-2" form="menu-form">
+                          <input type="radio" name="menu" id="b-1-1-1-1-2" form="menu-form" hidden>
                           <label for="b-1-1-1-1-2" class="open">Open Option B-1-1-1-1-2</label>
-                          <label for="b-1-1-1-1" class="close">Close Option B-1-1-1-1-2</label>
-                          <div class="panel"><div class="leaf">Option B-1-1-1-1-2</div></div>
+                          <label for="b-1-1-1-1" class="close" hidden>Close Option B-1-1-1-1-2</label>
+                          <div class="panel" hidden><div class="leaf">Option B-1-1-1-1-2</div></div>
                         </div>
                       </div>
                     </div>
 
                     <div class="node">
-                      <input type="radio" name="menu" id="b-1-1-1-2" form="menu-form">
+                      <input type="radio" name="menu" id="b-1-1-1-2" form="menu-form" hidden>
                       <label for="b-1-1-1-2" class="open">Open Option B-1-1-1-2</label>
-                      <label for="b-1-1-1" class="close">Close Option B-1-1-1-2</label>
-                      <div class="panel"><div class="leaf">Option B-1-1-1-2</div></div>
+                      <label for="b-1-1-1" class="close" hidden>Close Option B-1-1-1-2</label>
+                      <div class="panel" hidden><div class="leaf">Option B-1-1-1-2</div></div>
                     </div>
                   </div>
                 </div>
 
                 <div class="node">
-                  <input type="radio" name="menu" id="b-1-1-2" form="menu-form">
+                  <input type="radio" name="menu" id="b-1-1-2" form="menu-form" hidden>
                   <label for="b-1-1-2" class="open">Open Option B-1-1-2</label>
-                  <label for="b-1-1" class="close">Close Option B-1-1-2</label>
-                  <div class="panel"><div class="leaf">Option B-1-1-2</div></div>
+                  <label for="b-1-1" class="close" hidden>Close Option B-1-1-2</label>
+                  <div class="panel" hidden><div class="leaf">Option B-1-1-2</div></div>
                 </div>
               </div>
             </div>
 
             <div class="node">
-              <input type="radio" name="menu" id="b-1-2" form="menu-form">
+              <input type="radio" name="menu" id="b-1-2" form="menu-form" hidden>
               <label for="b-1-2" class="open">Open Option B-1-2</label>
-              <label for="b-1" class="close">Close Option B-1-2</label>
-              <div class="panel"><div class="leaf">Option B-1-2</div></div>
+              <label for="b-1" class="close" hidden>Close Option B-1-2</label>
+              <div class="panel" hidden><div class="leaf">Option B-1-2</div></div>
             </div>
           </div>
         </div>
 
         <div class="node">
-          <input type="radio" name="menu" id="b-2" form="menu-form">
+          <input type="radio" name="menu" id="b-2" form="menu-form" hidden>
           <label for="b-2" class="open">Open Option B-2</label>
-          <label for="b" class="close">Close Option B-2</label>
+          <label for="b" class="close" hidden>Close Option B-2</label>
 
-          <div class="panel">
+          <div class="panel" hidden>
             <div class="node">
-              <input type="radio" name="menu" id="b-2-1" form="menu-form">
+              <input type="radio" name="menu" id="b-2-1" form="menu-form" hidden>
               <label for="b-2-1" class="open">Open Option B-2-1</label>
-              <label for="b-2" class="close">Close Option B-2-1</label>
-              <div class="panel"><div class="leaf">Option B-2-1</div></div>
+              <label for="b-2" class="close" hidden>Close Option B-2-1</label>
+              <div class="panel" hidden><div class="leaf">Option B-2-1</div></div>
             </div>
 
             <div class="node">
-              <input type="radio" name="menu" id="b-2-2" form="menu-form">
+              <input type="radio" name="menu" id="b-2-2" form="menu-form" hidden>
               <label for="b-2-2" class="open">Open Option B-2-2</label>
-              <label for="b-2" class="close">Close Option B-2-2</label>
-              <div class="panel"><div class="leaf">Option B-2-2</div></div>
+              <label for="b-2" class="close" hidden>Close Option B-2-2</label>
+              <div class="panel" hidden><div class="leaf">Option B-2-2</div></div>
             </div>
           </div>
         </div>
@@ -255,96 +256,96 @@
 
     <!-- ==================== MENU C ==================== -->
     <div class="node">
-      <input type="radio" name="menu" id="c" form="menu-form">
+      <input type="radio" name="menu" id="c" form="menu-form" hidden>
       <label for="c" class="open">Open Menu C</label>
-      <button type="reset" form="menu-form" class="close">Close Menu C</button>
+      <button type="reset" form="menu-form" class="close" hidden>Close Menu C</button>
 
-      <div class="panel">
+      <div class="panel" hidden>
         <div class="node">
-          <input type="radio" name="menu" id="c-1" form="menu-form">
+          <input type="radio" name="menu" id="c-1" form="menu-form" hidden>
           <label for="c-1" class="open">Open Option C-1</label>
-          <label for="c" class="close">Close Option C-1</label>
+          <label for="c" class="close" hidden>Close Option C-1</label>
 
-          <div class="panel">
+          <div class="panel" hidden>
             <div class="node">
-              <input type="radio" name="menu" id="c-1-1" form="menu-form">
+              <input type="radio" name="menu" id="c-1-1" form="menu-form" hidden>
               <label for="c-1-1" class="open">Open Option C-1-1</label>
-              <label for="c-1" class="close">Close Option C-1-1</label>
+              <label for="c-1" class="close" hidden>Close Option C-1-1</label>
 
-              <div class="panel">
+              <div class="panel" hidden>
                 <div class="node">
-                  <input type="radio" name="menu" id="c-1-1-1" form="menu-form">
+                  <input type="radio" name="menu" id="c-1-1-1" form="menu-form" hidden>
                   <label for="c-1-1-1" class="open">Open Option C-1-1-1</label>
-                  <label for="c-1-1" class="close">Close Option C-1-1-1</label>
+                  <label for="c-1-1" class="close" hidden>Close Option C-1-1-1</label>
 
-                  <div class="panel">
+                  <div class="panel" hidden>
                     <div class="node">
-                      <input type="radio" name="menu" id="c-1-1-1-1" form="menu-form">
+                      <input type="radio" name="menu" id="c-1-1-1-1" form="menu-form" hidden>
                       <label for="c-1-1-1-1" class="open">Open Option C-1-1-1-1</label>
-                      <label for="c-1-1-1" class="close">Close Option C-1-1-1-1</label>
+                      <label for="c-1-1-1" class="close" hidden>Close Option C-1-1-1-1</label>
 
-                      <div class="panel">
+                      <div class="panel" hidden>
                         <div class="node">
-                          <input type="radio" name="menu" id="c-1-1-1-1-1" form="menu-form">
+                          <input type="radio" name="menu" id="c-1-1-1-1-1" form="menu-form" hidden>
                           <label for="c-1-1-1-1-1" class="open">Open Option C-1-1-1-1-1</label>
-                          <label for="c-1-1-1-1" class="close">Close Option C-1-1-1-1-1</label>
-                          <div class="panel"><div class="leaf">Option C-1-1-1-1-1</div></div>
+                          <label for="c-1-1-1-1" class="close" hidden>Close Option C-1-1-1-1-1</label>
+                          <div class="panel" hidden><div class="leaf">Option C-1-1-1-1-1</div></div>
                         </div>
 
                         <div class="node">
-                          <input type="radio" name="menu" id="c-1-1-1-1-2" form="menu-form">
+                          <input type="radio" name="menu" id="c-1-1-1-1-2" form="menu-form" hidden>
                           <label for="c-1-1-1-1-2" class="open">Open Option C-1-1-1-1-2</label>
-                          <label for="c-1-1-1-1" class="close">Close Option C-1-1-1-1-2</label>
-                          <div class="panel"><div class="leaf">Option C-1-1-1-1-2</div></div>
+                          <label for="c-1-1-1-1" class="close" hidden>Close Option C-1-1-1-1-2</label>
+                          <div class="panel" hidden><div class="leaf">Option C-1-1-1-1-2</div></div>
                         </div>
                       </div>
                     </div>
 
                     <div class="node">
-                      <input type="radio" name="menu" id="c-1-1-1-2" form="menu-form">
+                      <input type="radio" name="menu" id="c-1-1-1-2" form="menu-form" hidden>
                       <label for="c-1-1-1-2" class="open">Open Option C-1-1-1-2</label>
-                      <label for="c-1-1-1" class="close">Close Option C-1-1-1-2</label>
-                      <div class="panel"><div class="leaf">Option C-1-1-1-2</div></div>
+                      <label for="c-1-1-1" class="close" hidden>Close Option C-1-1-1-2</label>
+                      <div class="panel" hidden><div class="leaf">Option C-1-1-1-2</div></div>
                     </div>
                   </div>
                 </div>
 
                 <div class="node">
-                  <input type="radio" name="menu" id="c-1-1-2" form="menu-form">
+                  <input type="radio" name="menu" id="c-1-1-2" form="menu-form" hidden>
                   <label for="c-1-1-2" class="open">Open Option C-1-1-2</label>
-                  <label for="c-1-1" class="close">Close Option C-1-1-2</label>
-                  <div class="panel"><div class="leaf">Option C-1-1-2</div></div>
+                  <label for="c-1-1" class="close" hidden>Close Option C-1-1-2</label>
+                  <div class="panel" hidden><div class="leaf">Option C-1-1-2</div></div>
                 </div>
               </div>
             </div>
 
             <div class="node">
-              <input type="radio" name="menu" id="c-1-2" form="menu-form">
+              <input type="radio" name="menu" id="c-1-2" form="menu-form" hidden>
               <label for="c-1-2" class="open">Open Option C-1-2</label>
-              <label for="c-1" class="close">Close Option C-1-2</label>
-              <div class="panel"><div class="leaf">Option C-1-2</div></div>
+              <label for="c-1" class="close" hidden>Close Option C-1-2</label>
+              <div class="panel" hidden><div class="leaf">Option C-1-2</div></div>
             </div>
           </div>
         </div>
 
         <div class="node">
-          <input type="radio" name="menu" id="c-2" form="menu-form">
+          <input type="radio" name="menu" id="c-2" form="menu-form" hidden>
           <label for="c-2" class="open">Open Option C-2</label>
-          <label for="c" class="close">Close Option C-2</label>
+          <label for="c" class="close" hidden>Close Option C-2</label>
 
-          <div class="panel">
+          <div class="panel" hidden>
             <div class="node">
-              <input type="radio" name="menu" id="c-2-1" form="menu-form">
+              <input type="radio" name="menu" id="c-2-1" form="menu-form" hidden>
               <label for="c-2-1" class="open">Open Option C-2-1</label>
-              <label for="c-2" class="close">Close Option C-2-1</label>
-              <div class="panel"><div class="leaf">Option C-2-1</div></div>
+              <label for="c-2" class="close" hidden>Close Option C-2-1</label>
+              <div class="panel" hidden><div class="leaf">Option C-2-1</div></div>
             </div>
 
             <div class="node">
-              <input type="radio" name="menu" id="c-2-2" form="menu-form">
+              <input type="radio" name="menu" id="c-2-2" form="menu-form" hidden>
               <label for="c-2-2" class="open">Open Option C-2-2</label>
-              <label for="c-2" class="close">Close Option C-2-2</label>
-              <div class="panel"><div class="leaf">Option C-2-2</div></div>
+              <label for="c-2" class="close" hidden>Close Option C-2-2</label>
+              <div class="panel" hidden><div class="leaf">Option C-2-2</div></div>
             </div>
           </div>
         </div>

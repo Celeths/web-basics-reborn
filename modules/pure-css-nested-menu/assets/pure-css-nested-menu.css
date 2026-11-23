@@ -1,38 +1,12 @@
-/* ---- pure-css-nested-menu ----
-
-   A branching menu at any depth where at most one path is open at a time:
-   closing a level closes every level beneath it and leaves its ancestors open.
-
-   Required markup (one external <form id="…"> per tree, shared by every
-   control in it):
-
-     .node > input[type="radio"][name="…"][form="…"]   the state carrier
-     .node > label.open[for="self"]                    opens this node
-     .node > label.close[for="parent"]                 closes it to the parent
-     .node > .panel                                    the children container
-
-   A root .close is a <button type="reset" form="…">, which clears the tree.
-
-   Needs: :has().   Script: none (the optional script is accessibility only).
-   Pruned: the radios and labels still toggle, unstyled but working. */
-
-.node > input[type="radio"] {
-  position: absolute;
-  opacity: 0;
-  pointer-events: none;
+.node > input[type=radio] {
+	display: block;
+	position: absolute;
+	opacity: 0;
+	pointer-events: none;
 }
 
-/* Every node starts closed: only its .open face shows. */
-.node > .close,
-.node > .panel {
-  display: none;
-}
+.node > :is(.close, .panel),
+.node:has(input[type=radio]:checked) > .open { display: none; }
 
-.node > .open {
-  display: block;
-}
-
-/* The engine. Three rules; depth and branching are markup, never CSS. */
-.node:has(input[type="radio"]:checked) > .open  { display: none; }
-.node:has(input[type="radio"]:checked) > .close { display: block; }
-.node:has(input[type="radio"]:checked) > .panel { display: block; }
+.node > .open,
+.node:has(input[type=radio]:checked) > :is(.close, .panel) { display: block; }

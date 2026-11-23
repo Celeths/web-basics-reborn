@@ -12,6 +12,7 @@ Close a level and everything beneath it closes with it; its ancestors stay open;
 - [Optional JavaScript](#optional-javascript)
 - [Quick start](#quick-start)
 - [Markup contract](#markup-contract)
+- [Missing-module failsafe](#missing-module-failsafe)
 - [How it works](#how-it-works)
 - [Notes and constraints](#notes-and-constraints)
 - [Browser support](#browser-support)
@@ -27,19 +28,20 @@ Close a level and everything beneath it closes with it; its ancestors stay open;
 - **No build, no dependencies.** One stylesheet. The optional script is the only other file.
 - **Presentation stays yours.** The engine hides the radio and flips `display` on the two faces and the panel. Size, colour, spacing and motion are not in it.
 - **Many menus per page.** One `<form>` and one radio `name` per tree; they never interfere.
+- **Safe fallback if the stylesheet is missing.** Adding `hidden` to radios, `.close` faces, and `.panel` containers keeps the menu collapsed to its top-level `.open` headers when the CSS cannot be reached, so page layout stays intact.
 
 ## Optional JavaScript
 
-The menu works without any script. [`assets/pure-css-nested-menu.js`](assets/pure-css-nested-menu.js) is supplemental: it adds what the markup cannot say to assistive technology, and reads state the radio group already holds.
+The menu works without any script. [`assets/pure-css-nested-menu.js`](assets/pure-css-nested-menu.js) is supplemental: it adds what the markup cannot say to assistive technology, reading state from the radio group without ever writing or mutating it.
 
 It adds:
 
-- `role="button"` and `tabindex="0"` on the `.open` and `.close` labels
-- `aria-expanded` on both faces, following the node's real state
-- `aria-controls`, linking each face to the panel it shows
-- Enter and Space activation on those labels
+- `role="button"` and `tabindex="0"` on `.open` and `.close` `<label>` faces (labels are not focusable or keyboard-pressable on their own; root `<button type="reset">` elements already are and keep their native button identity)
+- `aria-expanded` on both faces, computed with the same subtree check as the CSS (`input[type=radio]:checked` anywhere inside `.node`)
+- `aria-controls` linking each face to its `.panel` (generating `nested-menu-panel-N` ids only when a panel has no `id`, and preserving any author-supplied `role`, `tabindex`, or `aria-controls`)
+- Enter and Space activation on the faces
 
-It re-syncs on `change`, on `reset`, and on `DOMContentLoaded`, and exposes `window.pureCssNestedMenu.sync()` for nodes added later.
+Load it once after the markup or with `defer`; it is safe to include twice (guarded by `window.pureCssNestedMenu.loaded`). It re-syncs on `change`, on `reset` (deferred via `queueMicrotask` so the browser clears the radios first), and on `DOMContentLoaded`, and exposes `window.pureCssNestedMenu.sync()` for nodes added later.
 
 Without it: the menu still opens, closes and resets with a pointer, and the radios remain keyboard-operable through the group. What is lost is the announced state and Enter/Space on the faces.
 
@@ -69,10 +71,10 @@ Without it: the menu still opens, closes and resets with a pointer, and the radi
 | --- | --- | --- |
 | `<form id="…">` | form owner | One per tree, empty, never nested |
 | `.node` | one menu item | Wraps a radio, its two faces, its children |
-| `input[type="radio"]` | state | Direct child of `.node`; one `name` and one `form` shared across the tree |
+| `input[type="radio"]` | state | Direct child of `.node`; one `name` and one `form` shared across the tree (add `hidden` for the failsafe) |
 | `.open` | open face | `<label for="this-id">` |
-| `.close` | close face | `<label for="parent-id">`; at the root, `<button type="reset" form="…">` |
-| `.panel` | children container | Direct child of `.node`, after the faces |
+| `.close` | close face | `<label for="parent-id">`; at the root, `<button type="reset" form="…">` (add `hidden` for the failsafe) |
+| `.panel` | children container | Direct child of `.node`, after the faces (add `hidden` for the failsafe) |
 
 The faces and the panel must be **direct children** of `.node`, because the engine selects them with `>`.
 
@@ -82,10 +84,10 @@ Every node below the root is the same block. Change the ids, the label text, and
 
 ```html
 <div class="node">
-  <input type="radio" name="menu" id="r-self" form="menu-form">
+  <input type="radio" name="menu" id="r-self" form="menu-form" hidden>
   <label for="r-self" class="open">Node title</label>
-  <label for="r-parent" class="close">Node title</label>
-  <div class="panel">
+  <label for="r-parent" class="close" hidden>Node title</label>
+  <div class="panel" hidden>
     <!-- any number of child .node blocks -->
   </div>
 </div>
@@ -95,12 +97,43 @@ A root node is the same block with the close face swapped for a reset control bo
 
 ```html
 <div class="node">
-  <input type="radio" name="menu" id="r-root" form="menu-form">
+  <input type="radio" name="menu" id="r-root" form="menu-form" hidden>
   <label for="r-root" class="open">Menu</label>
-  <button type="reset" form="menu-form" class="close">Menu</button>
-  <div class="panel">…</div>
+  <button type="reset" form="menu-form" class="close" hidden>Menu</button>
+  <div class="panel" hidden>…</div>
 </div>
 ```
+
+## Missing-module failsafe
+
+If the stylesheet fails to load or is removed, every hidden radio button, every duplicate `.close` control, and every nested `.panel` at every depth would render open at once and blow out surrounding page layout. Add the HTML `hidden` attribute directly in markup on those three elements so the menu collapses cleanly to its top-level `.open` headers — no JavaScript needed:
+
+- **Radios:** `<input type="radio" … hidden>`
+- **Close faces:** `<button type="reset" class="close" … hidden>` and `<label class="close" … hidden>`
+- **Panels:** `<div class="panel" hidden>`
+
+```html
+<div class="node">
+  <input type="radio" name="menu" id="a" form="menu-form" hidden>
+  <label for="a" class="open">Open Menu A</label>
+  <button type="reset" form="menu-form" class="close" hidden>Close Menu A</button>
+  <div class="panel" hidden>
+    <div class="node">
+      <input type="radio" name="menu" id="a-1" form="menu-form" hidden>
+      <label for="a-1" class="open">Open Option A-1</label>
+      <label for="a" class="close" hidden>Close Option A-1</label>
+      <div class="panel" hidden>…</div>
+    </div>
+  </div>
+</div>
+```
+
+**How it behaves in both states:**
+
+- **Stylesheet missing or unreachable:** The browser's user-agent `[hidden] { display: none; }` removes every radio, `.close` face, and `.panel` from layout. Only the top-level `.open` labels remain visible so the rest of the page is not pushed out of place (clicking them will not expand the menu while the CSS is missing).
+- **Stylesheet loaded:** Author rules automatically override user-agent `[hidden]`: `.node > input[type=radio]` restores `display: block` (keeping radios keyboard-focusable while visually hidden via `opacity: 0; pointer-events: none`), and `.node:has(input[type=radio]:checked) > :is(.close, .panel)` sets `display: block` whenever a node opens.
+
+> Avoid `style="display: none"` on radios, `.close`, or `.panel` — inline styles out-specify the stylesheet and would keep them permanently hidden. In host page CSS, also avoid setting `display` on `.close` or `.panel` (which would override `[hidden]` even when the module is missing); setting `display: block` on `.open` alone is safe so `<label class="open">` keeps block width if the module fails to load.
 
 ## How it works
 
@@ -120,25 +153,26 @@ That matches the node's own radio and every radio deeper in its subtree, so the 
 
 ### The engine
 
+[`assets/pure-css-nested-menu.css`](assets/pure-css-nested-menu.css) ships comment-free and tab-indented in three rules total:
+
 ```css
-/* Hide the radios without breaking label activation or the reset */
-.node > input[type="radio"] {
-  position: absolute;
-  opacity: 0;
-  pointer-events: none;
+.node > input[type=radio] {
+	display: block;
+	position: absolute;
+	opacity: 0;
+	pointer-events: none;
 }
 
-/* Every node starts closed */
-.node > .close,
-.node > .panel { display: none; }
+.node > :is(.close, .panel),
+.node:has(input[type=radio]:checked) > .open { display: none; }
 
-.node > .open { display: block; }
-
-/* The three rules */
-.node:has(input[type="radio"]:checked) > .open  { display: none; }
-.node:has(input[type="radio"]:checked) > .close { display: block; }
-.node:has(input[type="radio"]:checked) > .panel { display: block; }
+.node > .open,
+.node:has(input[type=radio]:checked) > :is(.close, .panel) { display: block; }
 ```
+
+1. **Rule 1** overrides `hidden` with `display: block` and visually hides the radios (`opacity: 0; pointer-events: none`) without breaking label activation, keyboard focus, or form reset.
+2. **Rule 2** hides `.close` and `.panel` while a node is closed, and hides `.open` once any radio inside `.node` is checked.
+3. **Rule 3** shows `.open` while closed, and reveals `.close` and `.panel` once checked (the `:has(...)` selectors carry higher specificity than the closed defaults, so depth and branching stay purely in markup).
 
 ### How interactions behave
 
@@ -185,12 +219,13 @@ So the CSS never grows:
 - **One radio name per tree.** Two names means one radio can be checked in each; the two groups then open independently, which is only right if they are two menus.
 - **Closed panels take no space.** The engine uses `display`, so a closed node leaves layout. If you need closed panels measurable for height animation or anchor positioning, that is a different engine.
 - **The radios stay focusable.** They are visually hidden, not `disabled`, so the group is keyboard-operable. The optional script is what makes the faces themselves pressable.
+- **When pruned.** With the `hidden` failsafe in place (see [Missing-module failsafe](#missing-module-failsafe)), removing the stylesheet leaves compact collapsed top-level `.open` headers instead of expanding the full tree; without `hidden`, the raw radios, labels, and reset buttons still toggle state unstyled.
 
 ## Browser support
 
 - `:has()`: Chrome 105+, Edge 105+, Safari 15.4+, Firefox 121+.
 - No JavaScript is required for the menu to work.
-- The optional script needs nothing beyond ES2020.
+- The optional script needs nothing beyond ES2021 (`??=`, `||=`; Chrome 85+, Edge 85+, Safari 14+, Firefox 79+).
 
 ## Files
 
@@ -198,8 +233,11 @@ So the CSS never grows:
 modules/pure-css-nested-menu/
 ├── readme.md
 ├── assets/
-│   ├── pure-css-nested-menu.css   required
-│   └── pure-css-nested-menu.js    optional, accessibility
+│   ├── pure-css-nested-menu.css           required
+│   └── pure-css-nested-menu.js            optional, accessibility
 └── examples/
-    └── abc.html                   3 menus, 5 levels, links both files
+    ├── abc.html                           3 menus, 5 levels, links both files
+    └── example-assets/
+        ├── pure-css-nested-menu.css       local module copy for standalone examples
+        └── pure-css-nested-menu.js        local optional script copy for standalone examples
 ```
